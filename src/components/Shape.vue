@@ -1,6 +1,6 @@
 <template>
   <div class="shape">
-    <div>{{ shape.weight }}kg</div>
+    <div class="weight">{{ shape.weight }}kg</div>
   </div>
 </template>
 
@@ -15,12 +15,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .shape {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   transform-origin: top left;
+  .weight {
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+  }
 }
 </style>
