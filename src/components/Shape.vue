@@ -1,5 +1,5 @@
 <template>
-  <div class="shape">
+  <div class="shape" :class="shapeClass">
     <div class="weight">{{ shape.weight }}kg</div>
   </div>
 </template>
@@ -12,11 +12,22 @@ export default {
       required: true,
     },
   },
+  computed: {
+    shapeClass() {
+      const { type } = this.shape;
+      return {
+        square: type === 'SQUARE',
+        triangle: type === 'TRIANGLE',
+        circle: type === 'CIRCLE',
+      };
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .shape {
+  background: green;
   position: absolute;
   display: flex;
   align-items: center;
@@ -27,5 +38,14 @@ export default {
     font-weight: 500;
     color: #fff;
   }
+}
+.square,
+.circle {
+  width  : 3rem;
+  height : 3rem;
+}
+
+.circle {
+  border-radius: 50%;
 }
 </style>
