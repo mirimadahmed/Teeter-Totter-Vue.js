@@ -48,4 +48,18 @@ export default {
 .circle {
   border-radius: 50%;
 }
+.triangle {
+  width         : 0;
+  height        : 0;
+  border-left   : 1.5rem solid transparent;
+  border-right  : 1.5rem solid transparent;
+  border-bottom : 2rem solid;
+
+  .weight {
+    position   : absolute;
+    top        : calc(100% + 1rem);
+    width      : 4.5rem;
+    text-align : center;
+  }
+}
 </style>
