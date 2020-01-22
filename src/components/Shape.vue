@@ -1,6 +1,6 @@
 <template>
   <div class="shape">
-
+    <div>{{ shape.weight }}kg</div>
   </div>
 </template>
 
