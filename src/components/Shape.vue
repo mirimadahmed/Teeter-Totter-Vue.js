@@ -6,7 +6,12 @@
 
 <script>
 export default {
-
+  props: {
+    shape: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 
