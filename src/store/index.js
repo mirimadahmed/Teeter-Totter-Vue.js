@@ -70,6 +70,10 @@ export default new Vuex.Store({
     startGame({ commit, state }) {
       if (!state.gamePaused) { commit('toggleSimulation'); }
       commit('resetGame');
+
+      // initial setup one shape for user one for right side
+      commit('getShape');
+      commit('getShape', true);
     },
   },
 });
