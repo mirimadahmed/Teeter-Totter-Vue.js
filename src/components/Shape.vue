@@ -27,6 +27,26 @@ export default {
       };
     },
   },
+  mounted() {
+    this.setScaleAndColor();
+  },
+  methods: {
+    setScaleAndColor() {
+      const { color, scale, type } = this.shape;
+      const { style } = this.$el;
+
+      // Set scale according to weight
+      style.transform = `scale(${scale})`;
+
+      // Set random generated color
+      // if triangle set the border bottom color
+      if (type === 'TRIANGLE') {
+        style.borderBottomColor = color;
+      } else {
+        style.backgroundColor = color;
+      }
+    },
+  },
 };
 </script>
 
