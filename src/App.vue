@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>Welcome to teeter totter game.</h1>
     <Hud />
     <Ground />
   </div>
