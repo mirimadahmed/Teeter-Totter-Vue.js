@@ -50,15 +50,17 @@ export default {
     ...mapMutations(['getShape', 'toggleSimulation', 'addLeftShape', 'moveDroppingShape', 'updateVelocity']),
     ...mapActions(['startGame']),
     moveShape({ keyCode }) {
-      const isArrowPressed = [37, 39].includes(keyCode);
-      if (this.gamePaused || !isArrowPressed) return;
-      const shapeWidth = this.currentFallingShape.getBoundingClientRect().width;
-      const areaWidth = document.querySelector('.falling-shapes').getBoundingClientRect().width;
+      if (this.mode === 'manual') {
+        const isArrowPressed = [37, 39].includes(keyCode);
+        if (this.gamePaused || !isArrowPressed) return;
+        const shapeWidth = this.currentFallingShape.getBoundingClientRect().width;
+        const areaWidth = document.querySelector('.falling-shapes').getBoundingClientRect().width;
 
-      this.moveDroppingShape({
-        moveLeft: keyCode === 37,
-        width: (shapeWidth / areaWidth) * 100,
-      });
+        this.moveDroppingShape({
+          moveLeft: keyCode === 37,
+          width: (shapeWidth / areaWidth) * 100,
+        });
+      }
 
       this.$nextTick(this.getShapeBottomLimit);
     },
@@ -98,17 +100,16 @@ export default {
         this.getShapeBottomLimit();
       } else {
         // TODO: Show msg that game ended
-        // Referesh page for resetting the mode
-        window.history.go();
+        this.startGame();
       }
     },
   },
   mounted() {
     const boardEl = document.querySelector('.board');
     boardEl.addEventListener('transitionend', this.handleBoardTransitionEnd);
-    if (this.mode === 'manual') { window.addEventListener('keydown', this.moveShape); }
+    window.addEventListener('keydown', this.moveShape);
     this.$once('hook:beforeDestroy', () => {
-      if (this.mode === 'manual') { window.removeEventListener('keydown', this.moveShape); }
+      window.removeEventListener('keydown', this.moveShape);
       boardEl.removeEventListener('transitionend', this.handleBoardTransitionEnd);
     });
   },

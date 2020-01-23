@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="controls">
-      <button @click="toggleSimulation">{{ buttonText }}</button>
+      <button @click="toggleSimulation()">{{ buttonText }}</button>
       <button v-if="gamePaused" @click="toggleSimulation('auto')">Auto Mode</button>
       <button @click="resetGame">Reset</button>
     </div>
