@@ -1,6 +1,6 @@
 <template>
   <div class="teeter-totter">
-    <div class="board" :class="boardStyling">
+    <div class="board" :style="boardStyling">
       <!-- Left shapes -->
       <Shape
         v-for="shape in leftShapes"
@@ -40,7 +40,7 @@ export default {
       };
     },
     leftMore() {
-      return this.leftShapes.length > this.rightShapes.length;
+      return this.leftShapes.length - this.rightShapes.length;
     },
   },
   watch: {
