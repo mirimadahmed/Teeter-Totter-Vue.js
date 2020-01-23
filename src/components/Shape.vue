@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { CIRCLE, TRIANGLE, SQUARE } from '@/constants/shape';
+
 export default {
   props: {
     isOnBoard: {
@@ -21,9 +23,9 @@ export default {
     shapeClass() {
       const { type } = this.shape;
       return {
-        square: type === 'SQUARE',
-        triangle: type === 'TRIANGLE',
-        circle: type === 'CIRCLE',
+        square: type === SQUARE,
+        triangle: type === TRIANGLE,
+        circle: type === CIRCLE,
       };
     },
   },
