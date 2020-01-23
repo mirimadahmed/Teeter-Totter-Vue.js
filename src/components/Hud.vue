@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="controls">
-      <button @click="toggleSimulation">Play / Pause</button>
+      <button @click="toggleSimulation">{{ buttonText }}</button>
       <button @click="startGame">Reset</button>
     </div>
     <div class="auto-shapes-stats">
@@ -31,12 +31,16 @@ export default {
       'rightShapes',
       'droppingShapes',
       'currentSpeed',
+      'gamePaused',
     ]),
     leftShapesWeight() {
       return this.totalWeight(this.leftShapes);
     },
     rightShapesWeight() {
       return this.totalWeight(this.rightShapes);
+    },
+    buttonText() {
+      return this.gamePaused ? 'Play' : 'Paused';
     },
   },
   methods: {
