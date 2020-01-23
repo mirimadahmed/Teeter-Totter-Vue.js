@@ -25,6 +25,24 @@ export default new Vuex.Store({
     addLeftShape(state, shape = {}) {
       state.leftShapes.push(shape);
     },
+    getShape({ droppingShapes, rightShapes }, right = false) {
+      const weight = helpers.generateRandomNumber(1, 10 - 1);
+      const type = helpers.generateRandomNumber(1, 2);
+      const left = helpers.generateRandomNumber(0, 40);
+      const color = helpers.generateRandomColor();
+      const top = 0;
+      const scale = 1 + 0.08 * (weight - 1);
+      const id = helpers.getRandomID.next().value;
+
+      const shape = {
+        id, color, type, weight, top, left, scale,
+      };
+      if (right) {
+        rightShapes.push(shape);
+      } else {
+        droppingShapes.push(shape);
+      }
+    },
   },
   getters: {
     boardAngle({ leftShapesSum, rightShapesSum }) {
