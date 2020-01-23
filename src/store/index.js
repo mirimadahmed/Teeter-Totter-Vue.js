@@ -48,7 +48,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
-  },
-  modules: {
+    startGame({ commit, state }) {
+      if (!state.gamePaused) { commit('toggleSimulation'); }
+      commit('resetGame');
+    },
   },
 });
