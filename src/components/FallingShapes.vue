@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     ...mapGetters(['boardAngle', 'isBoardValid']),
-    ...mapState(['droppingShapes', 'gamePaused']),
+    ...mapState(['droppingShapes', 'gamePaused', 'currentSpeed']),
     currentFallingShape() {
       const { id } = this.droppingShapes[0];
       return document.getElementById(`falling-shape-${id}`);
@@ -74,14 +74,13 @@ export default {
           this.droppingShapes[0].top += 1;
           this.currentFallingShape.style.top = `${this.droppingShapes[0].top}px`;
         }
-      }, this.fallingIntervalGap);
+      }, this.currentSpeed);
     },
     getShapeBottomLimit() {
       const boardBounds = document.querySelector('.board').getBoundingClientRect();
       const panelBounds = document.querySelector('.hud').getBoundingClientRect();
       const shapeBounds = this.currentFallingShape.getBoundingClientRect();
 
-      // Similarity of triangles
       const totterCathet = boardBounds.bottom - boardBounds.top - 10;
       const similarCathet = (this.droppingShapes[0].left * totterCathet) / 100;
 
@@ -96,6 +95,7 @@ export default {
         this.getShapeBottomLimit();
       } else {
         this.toggleSimulation();
+        // TODO: Show some game ending transition here
       }
     },
   },
