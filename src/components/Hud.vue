@@ -6,7 +6,7 @@
         Total weight: {{ leftShapesWeight  }}
       </div>
       <div>
-        Momentum: {{ fallingShapes[0] * currentSpeed }}
+        Momentum: {{ droppingShapes[0] && droppingShapes[0].weight * currentSpeed }}
       </div>
     </div>
     <div class="auto-shapes-stats">
@@ -25,7 +25,7 @@ export default {
     ...mapState([
       'leftShapes',
       'rightShapes',
-      'fallingShapes',
+      'droppingShapes',
       'currentSpeed',
     ]),
     leftShapesWeight() {
