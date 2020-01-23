@@ -26,5 +26,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.ground {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+  min-width: 500px;
+  width: 70%;
+  margin: 0 auto;
+  padding-bottom: 10rem;
+}
 </style>
