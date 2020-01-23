@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     ...mapGetters(['boardAngle', 'isBoardValid']),
-    ...mapState(['droppingShapes', 'gamePaused', 'currentSpeed']),
+    ...mapState(['droppingShapes', 'gamePaused', 'currentSpeed', 'mode']),
     currentFallingShape() {
       const { id } = this.droppingShapes[0];
       return document.getElementById(`falling-shape-${id}`);
@@ -97,16 +97,18 @@ export default {
       if (this.isBoardValid) {
         this.getShapeBottomLimit();
       } else {
-        this.startGame();
+        // TODO: Show msg that game ended
+        // Referesh page for resetting the mode
+        window.history.go();
       }
     },
   },
   mounted() {
     const boardEl = document.querySelector('.board');
     boardEl.addEventListener('transitionend', this.handleBoardTransitionEnd);
-    window.addEventListener('keydown', this.moveShape);
+    if (this.mode === 'manual') { window.addEventListener('keydown', this.moveShape); }
     this.$once('hook:beforeDestroy', () => {
-      window.removeEventListener('keydown', this.moveShape);
+      if (this.mode === 'manual') { window.removeEventListener('keydown', this.moveShape); }
       boardEl.removeEventListener('transitionend', this.handleBoardTransitionEnd);
     });
   },

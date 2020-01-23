@@ -12,6 +12,7 @@ export default new Vuex.Store({
     droppingShapes: [],
     gamePaused: true, // initially game will be paused
     currentSpeed: 10, // velocity of coming down
+    mode: '',
   },
   mutations: {
     resetGame(state) {
@@ -19,8 +20,9 @@ export default new Vuex.Store({
       state.rightShapes = [];
       state.droppingShapes = [];
     },
-    toggleSimulation(state) {
+    toggleSimulation(state, mode = 'manual') {
       state.gamePaused = !state.gamePaused;
+      state.mode = mode;
     },
     addLeftShape(state, shape = {}) {
       state.leftShapes.push(shape);

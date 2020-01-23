@@ -11,7 +11,8 @@
     </div>
     <div class="controls">
       <button @click="toggleSimulation">{{ buttonText }}</button>
-      <button @click="startGame">Reset</button>
+      <button v-if="gamePaused" @click="toggleSimulation('auto')">Auto Mode</button>
+      <button @click="resetGame">Reset</button>
     </div>
     <div class="auto-shapes-stats">
       <div>
@@ -40,12 +41,15 @@ export default {
       return this.totalWeight(this.rightShapes);
     },
     buttonText() {
-      return this.gamePaused ? 'Play' : 'Paused';
+      return this.gamePaused ? 'Play' : 'Pause';
     },
   },
   methods: {
     ...mapMutations(['toggleSimulation']),
     ...mapActions(['startGame']),
+    resetGame() {
+      window.history.go();
+    },
     totalWeight(shapes = []) {
       let total = 0;
       shapes.forEach((element) => {
