@@ -37,7 +37,7 @@ export default {
     boardStyling() {
       return {
         transform: `rotate(${this.boardAngle / 2}deg)`,
-        transition: `${(this.boardAngle / 2) * 10}ms ease-in`,
+        transition: `${Math.abs(this.boardAngle / 2) * 10}ms ease-in`,
       };
     },
     leftMore() {
