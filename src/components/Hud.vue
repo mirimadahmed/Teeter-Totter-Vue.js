@@ -9,6 +9,10 @@
         Momentum: {{ droppingShapes[0] && droppingShapes[0].weight * currentSpeed }}
       </div>
     </div>
+    <div class="controls">
+      <button @click="toggleSimulation">Play / Pause</button>
+      <button @click="startGame">Reset</button>
+    </div>
     <div class="auto-shapes-stats">
       <div>
         Total weight: {{ rightShapesWeight }}
@@ -18,7 +22,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -36,6 +40,8 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(['toggleSimulation']),
+    ...mapActions(['startGame']),
     totalWeight(shapes = []) {
       let total = 0;
       shapes.forEach((element) => {
@@ -53,5 +59,10 @@ export default {
   justify-content: space-between;
   flex: 0 0 6rem;
   padding: 0.5rem 1.5rem;
+}
+.controls button {
+  padding: 5px;
+  margin: 5px;
+  font-size: 14px;
 }
 </style>

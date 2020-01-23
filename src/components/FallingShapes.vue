@@ -35,7 +35,9 @@ export default {
   watch: {
     gamePaused: {
       handler(current) {
-        if (!current) {
+        if (current) {
+          clearInterval(this.intervalId);
+        } else {
           this.getShapeBottomLimit();
           this.animateShape();
         }
@@ -77,11 +79,11 @@ export default {
     getShapeBottomLimit() {
       const boardBounds = document.querySelector('.board').getBoundingClientRect();
       const panelBounds = document.querySelector('.hud').getBoundingClientRect();
-      const shapeBounds = this.fallingShapeEl.getBoundingClientRect();
+      const shapeBounds = this.currentFallingShape.getBoundingClientRect();
 
       // Similarity of triangles
       const totterCathet = boardBounds.bottom - boardBounds.top - 10;
-      const similarCathet = (this.fallingShapes[0].left * totterCathet) / 100;
+      const similarCathet = (this.droppingShapes[0].left * totterCathet) / 100;
 
       this.shapeBottomLimit = this.boardAngle >= 0
         ? boardBounds.top + similarCathet - shapeBounds.height - panelBounds.height
