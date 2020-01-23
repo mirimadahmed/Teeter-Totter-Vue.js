@@ -65,7 +65,7 @@ export default new Vuex.Store({
   },
   getters: {
     boardAngle(state, { leftShapesSum, rightShapesSum }) {
-      let angle = 30;
+      let angle = 0;
       // added for start when there is no left shape yet
       if (leftShapesSum > 0) {
         // calculate the angle of the board
@@ -73,6 +73,8 @@ export default new Vuex.Store({
         angle = leftShapesSum > rightShapesSum
           ? diff / leftShapesSum * -50
           : diff / rightShapesSum * 50;
+      } else {
+        angle = 25;
       }
       return angle;
     },
