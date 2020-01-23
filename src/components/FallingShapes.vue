@@ -11,7 +11,9 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapMutations } from 'vuex';
+import {
+  mapGetters, mapState, mapMutations, mapActions,
+} from 'vuex';
 import Shape from '@/components/Shape.vue';
 
 export default {
@@ -46,6 +48,7 @@ export default {
   },
   methods: {
     ...mapMutations(['getShape', 'toggleSimulation', 'addLeftShape', 'moveDroppingShape', 'updateVelocity']),
+    ...mapActions(['startGame']),
     moveShape({ keyCode }) {
       const isArrowPressed = [37, 39].includes(keyCode);
       if (this.gamePaused || !isArrowPressed) return;
@@ -94,8 +97,7 @@ export default {
       if (this.isBoardValid) {
         this.getShapeBottomLimit();
       } else {
-        this.toggleSimulation();
-        // TODO: Show some game ending transition here
+        this.startGame();
       }
     },
   },
