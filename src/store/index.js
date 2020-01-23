@@ -11,6 +11,7 @@ export default new Vuex.Store({
     rightShapes: [],
     droppingShapes: [],
     gamePaused: true, // initially game will be paused
+    currentSpeed: 10, // velocity of coming down
   },
   mutations: {
     resetGame(state) {
