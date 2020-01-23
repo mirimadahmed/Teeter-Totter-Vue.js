@@ -44,7 +44,7 @@ export default {
     leftMore(val) {
       if (val && this.isBoardValid) {
         // get new shape for right side
-        this.getShape();
+        this.getShape(true);
       }
     },
   },
