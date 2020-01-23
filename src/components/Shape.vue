@@ -7,6 +7,11 @@
 <script>
 export default {
   props: {
+    onBoard: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     shape: {
       type: Object,
       required: true,
@@ -27,7 +32,6 @@ export default {
 
 <style lang="scss" scoped>
 .shape {
-  background: green;
   position: absolute;
   display: flex;
   align-items: center;
