@@ -37,6 +37,7 @@ export default {
     boardStyling() {
       return {
         transform: `rotate(${this.boardAngle / 2}deg)`,
+        transition: `${(this.boardAngle / 2) * 10}ms ease-in`,
       };
     },
     leftMore() {
@@ -68,7 +69,6 @@ export default {
   height: 10px;
   width: 100%;
   background-color: #0e24a0;
-  transition: 400ms ease-in;
 }
 .foundation {
   width: 0;
