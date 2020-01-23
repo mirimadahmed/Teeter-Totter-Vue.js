@@ -43,6 +43,25 @@ export default new Vuex.Store({
         droppingShapes.push(shape);
       }
     },
+    moveDroppingShape({ droppingShapes }, { moveLeft, width }) {
+      const shape = droppingShapes[0];
+
+      const canMoveLeft = shape.left - 1 >= 0;
+      const canMoveRight = shape.left + width + 1 <= 45;
+
+      if (moveLeft && canMoveLeft) {
+        shape.left -= 1;
+      } else if (canMoveRight) {
+        shape.left += 1;
+      }
+    },
+    updateVelocity(state, reset = false) {
+      if (reset) {
+        state.currentSpeed = 10;
+      } else if (state.currentSpeed > 5) {
+        state.currentSpeed -= 1;
+      }
+    },
   },
   getters: {
     boardAngle({ leftShapesSum, rightShapesSum }) {
