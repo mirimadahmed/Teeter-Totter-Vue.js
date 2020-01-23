@@ -1,8 +1,19 @@
 <template>
   <div class="teeter-totter">
-    <div class="board">
+    <div class="board" :class="boardStyling">
       <!-- Left shapes -->
+      <Shape
+        v-for="shape in leftShapes"
+        :key="shape.id"
+        :shape="shape"
+      />
+
       <!-- Right shapes -->
+      <Shape
+        v-for="shape in rightShapes"
+        :key="shape.id"
+        :shape="shape"
+      />
     </div>
     <!-- Bottom center triangle -->
     <div class="foundation"></div>
@@ -10,7 +21,37 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapState, mapMutations } from 'vuex';
+import Shape from '@/components/Shape.vue';
+
+export default {
+  components: {
+    Shape,
+  },
+  computed: {
+    ...mapGetters(['boardAngle', 'isBoardValid']),
+    ...mapState(['leftShapes', 'rightShapes']),
+    boardStyling() {
+      return {
+        transform: `rotate(${this.boardAngle / 2}deg)`,
+      };
+    },
+    leftMore() {
+      return this.leftShapes.length > this.rightShapes.length;
+    },
+  },
+  watch: {
+    leftMore(val) {
+      if (val && this.isBoardValid) {
+        // get new shape for right side
+        this.getShape();
+      }
+    },
+  },
+  methods: {
+    ...mapMutations(['getShape']),
+  },
+};
 </script>
 
 <style lang="scss" scoped>
