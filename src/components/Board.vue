@@ -40,7 +40,7 @@ export default {
       };
     },
     leftMore() {
-      return this.leftShapes.length - this.rightShapes.length;
+      return this.leftShapes.length === this.rightShapes.length;
     },
   },
   watch: {
