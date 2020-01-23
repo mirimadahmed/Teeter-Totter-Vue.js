@@ -1,12 +1,21 @@
 <template>
   <div id="app">
     <h1>Welcome to teeter totter game.</h1>
+    <Hud />
+    <Ground />
   </div>
 </template>
 
 <script>
+import Hud from '@/components/Hud.vue';
+import Ground from '@/components/Ground.vue';
+
 export default {
   name: 'app',
+  components: {
+    Hud,
+    Ground,
+  },
 };
 </script>
 
