@@ -64,18 +64,19 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    boardAngle({ leftShapesSum, rightShapesSum }) {
-      let angle = 0;
-
-      // calculate the angle of the board
-      const diff = Math.abs(leftShapesSum, rightShapesSum);
-      angle = leftShapesSum > rightShapesSum
-        ? diff / leftShapesSum * -50
-        : diff / rightShapesSum * 50;
-
+    boardAngle(state, { leftShapesSum, rightShapesSum }) {
+      let angle = 30;
+      // added for start when there is no left shape yet
+      if (leftShapesSum > 0) {
+        // calculate the angle of the board
+        const diff = Math.abs(leftShapesSum, rightShapesSum);
+        angle = leftShapesSum > rightShapesSum
+          ? diff / leftShapesSum * -50
+          : diff / rightShapesSum * 50;
+      }
       return angle;
     },
-    isBoardValid({ boardAngle }) {
+    isBoardValid(state, { boardAngle }) {
       return boardAngle > -30 && boardAngle < 30;
     },
     leftShapesSum({ leftShapes }) {
@@ -89,8 +90,10 @@ export default new Vuex.Store({
     startGame({ commit, state }) {
       if (!state.gamePaused) { commit('toggleSimulation'); }
       commit('resetGame');
+      commit('updateVelocity', true);
 
       // initial setup one shape for user one for right side
+      commit('getShape');
       commit('getShape');
       commit('getShape', true);
     },
