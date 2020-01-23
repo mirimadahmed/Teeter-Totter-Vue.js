@@ -21,6 +21,7 @@ export default {};
 }
 .board {
   position: relative;
+  height: 10px;
   width: 100%;
   background-color: #0e24a0;
   transition: 400ms ease-in;
