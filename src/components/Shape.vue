@@ -9,6 +9,11 @@ import { CIRCLE, TRIANGLE, SQUARE } from '@/constants/shape';
 
 export default {
   props: {
+    placeRandomly: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     isOnBoard: {
       type: Boolean,
       required: false,
@@ -31,6 +36,7 @@ export default {
   },
   mounted() {
     this.setScaleAndColor();
+    this.$watch('shape.left', this.setShapePosition, { immediate: true });
   },
   methods: {
     setScaleAndColor() {
@@ -42,11 +48,22 @@ export default {
 
       // Set random generated color
       // if triangle set the border bottom color
-      if (type === 'TRIANGLE') {
+      if (type === TRIANGLE) {
         style.borderBottomColor = color;
       } else {
         style.backgroundColor = color;
       }
+      if (this.isOnBoard) {
+        style.transform += ' translateY(-100%)';
+      }
+    },
+    setShapePosition(left) {
+      const { width } = this.$el.getBoundingClientRect();
+      const start = this.placeRandomly ? 60 : 0;
+
+      this.$el.style.left = (this.placeRandomly && left > 25)
+        ? `calc(${start + left}% - ${width}px)`
+        : `${start + left}%`;
     },
   },
 };

@@ -6,6 +6,7 @@
         v-for="shape in leftShapes"
         :key="shape.id"
         :shape="shape"
+        is-on-board
       />
 
       <!-- Right shapes -->
@@ -13,6 +14,8 @@
         v-for="shape in rightShapes"
         :key="shape.id"
         :shape="shape"
+        is-on-board
+        place-randomly
       />
     </div>
     <!-- Bottom center triangle -->
